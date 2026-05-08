@@ -26,7 +26,7 @@ export default function LoginPage() {
 				{/* Header */}
 				<div className="mb-8 text-center">
 					<h1 className="text-3xl font-bold text-white">
-						Welcome Back
+						Loopin
 					</h1>
 					<p className="mt-2 text-sm text-slate-400">
 						Login to continue your journey

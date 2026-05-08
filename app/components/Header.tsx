@@ -46,15 +46,9 @@ export default function Header() {
             href="/"
             className="flex items-center gap-3"
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 shadow-lg shadow-blue-500/20">
-              <span className="text-lg font-bold text-white">
-                S
-              </span>
-            </div>
-
             <div className="hidden sm:block">
               <h1 className="text-xl font-bold tracking-tight text-white">
-                SocialSpace
+                Loopin
               </h1>
 
               <p className="text-xs text-slate-400">

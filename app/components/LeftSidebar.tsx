@@ -83,8 +83,8 @@ export default function LeftSidebar() {
 								href={item.href}
 								className="group flex items-center gap-4 rounded-2xl px-4 py-3 text-gray-700 transition-all duration-300 hover:bg-blue-50 hover:text-blue-600"
 							>
-								<div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gray-100 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
-									<Icon size={20} />
+								<div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gray-100 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
+									<Icon size={16} />
 								</div>
 
 								<span className="text-[15px] font-medium">

@@ -34,7 +34,7 @@ export default function PostCard() {
             </div>
 
             {/* Content */}
-            <p className="mt-4 text-sm text-slate-200 leading-relaxed">
+            <p className="mt-4 text-sm text-black leading-relaxed">
                 This is a sample post content for your social media app 🚀 Build something amazing and scalable!
             </p>
 

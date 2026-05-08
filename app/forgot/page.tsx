@@ -15,22 +15,27 @@ export default function ForgotPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-4">
-      
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-100 px-4">
+
       {/* Card */}
-      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl">
+      <div className="w-full max-w-md rounded-3xl border border-slate-200 bg-white/80 p-8 shadow-xl backdrop-blur-xl">
 
         {/* Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-white">
+          <h1 className="text-3xl font-bold text-slate-800">
             Forgot Password
           </h1>
-          <p className="mt-2 text-sm text-slate-400">
+
+          <p className="mt-2 text-sm text-slate-500">
             Enter your email and we’ll send you a reset link.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-5"
+        >
 
           <Input
             type="email"
@@ -47,9 +52,12 @@ export default function ForgotPage() {
         </form>
 
         {/* Footer */}
-        <p className="mt-6 text-center text-sm text-slate-400">
+        <p className="mt-6 text-center text-sm text-slate-500">
           Back to{" "}
-          <Link href="/login" className="font-medium text-blue-400 hover:text-blue-300">
+          <Link
+            href="/login"
+            className="font-medium text-blue-600 hover:text-blue-500"
+          >
             Login
           </Link>
         </p>

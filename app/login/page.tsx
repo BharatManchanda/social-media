@@ -5,16 +5,22 @@ import { useState } from "react";
 import { Mail, Lock, LogIn } from "lucide-react";
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
+import { loginUser } from "../redux/slices/authSlice";
+import { useAppDispatch } from "../redux/hooks";
+// import { useAppDispatch } from "@/redux/hooks";
 
 export default function LoginPage() {
 	const [form, setForm] = useState({
 		email: "",
 		password: "",
 	});
-
-	const handleSubmit = (e: React.FormEvent) => {
+	const dispatch = useAppDispatch();
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log(form);
+		await dispatch(loginUser({
+			email: form.email,
+			password: form.password,
+		}))
 	};
 
 	return (

@@ -34,7 +34,7 @@ export function Button({
 
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${isTextIcon && variant !== "outline" ? "" : sizes[size]} ${className}`}
+      className={`${baseStyles} ${variants[variant]} ${isTextIcon ? "" : sizes[size]} ${className}`}
       {...props}
     >
       {children}

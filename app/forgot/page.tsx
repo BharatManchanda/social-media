@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { Mail, KeyRound } from "lucide-react";
+import { Input } from "../components/ui/Input";
+import { Button } from "../components/ui/Button";
 
 export default function ForgotPage() {
   const [email, setEmail] = useState("");
@@ -12,35 +15,41 @@ export default function ForgotPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-md border">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-4">
+      
+      {/* Card */}
+      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl">
 
-        <h1 className="text-2xl font-bold text-center mb-4">
-          Forgot Password 🔑
-        </h1>
+        {/* Header */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-white">
+            Forgot Password
+          </h1>
+          <p className="mt-2 text-sm text-slate-400">
+            Enter your email and we’ll send you a reset link.
+          </p>
+        </div>
 
-        <p className="text-sm text-gray-500 text-center mb-6">
-          Enter your email and we’ll send you a reset link.
-        </p>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-
-          <input
+          <Input
             type="email"
-            placeholder="Email"
-            className="border p-3 rounded-lg text-sm"
+            placeholder="Email address"
+            icon={<Mail size={18} />}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <button className="bg-blue-600 text-white py-2 rounded-lg">
+          <Button type="submit">
+            <KeyRound size={18} />
             Send Reset Link
-          </button>
+          </Button>
 
         </form>
 
-        <p className="text-sm text-center mt-4">
+        {/* Footer */}
+        <p className="mt-6 text-center text-sm text-slate-400">
           Back to{" "}
-          <Link href="/login" className="text-blue-600">
+          <Link href="/login" className="font-medium text-blue-400 hover:text-blue-300">
             Login
           </Link>
         </p>

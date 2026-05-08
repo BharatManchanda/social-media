@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { User, Mail, Lock, UserPlus } from "lucide-react";
+import { Input } from "../components/ui/Input";
+import { Button } from "../components/ui/Button";
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -16,49 +19,64 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-md border">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-4">
+      
+      {/* Card */}
+      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl">
+        
+        {/* Header */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-white">
+            Create Account
+          </h1>
+          <p className="mt-2 text-sm text-slate-400">
+            Join our community
+          </p>
+        </div>
 
-        <h1 className="text-2xl font-bold text-center mb-6">
-          Create Account 🚀
-        </h1>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-
-          <input
+          {/* Name */}
+          <Input
             type="text"
-            placeholder="Full Name"
-            className="border p-3 rounded-lg text-sm"
+            placeholder="Full name"
+            icon={<User size={18} />}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
 
-          <input
+          {/* Email */}
+          <Input
             type="email"
-            placeholder="Email"
-            className="border p-3 rounded-lg text-sm"
+            placeholder="Email address"
+            icon={<Mail size={18} />}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
           />
 
-          <input
+          {/* Password */}
+          <Input
             type="password"
             placeholder="Password"
-            className="border p-3 rounded-lg text-sm"
+            icon={<Lock size={18} />}
             onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
 
-          <button className="bg-blue-600 text-white py-2 rounded-lg">
-            Register
-          </button>
-
+          {/* Button */}
+          <Button type="submit">
+            <UserPlus size={18} />
+            Create Account
+          </Button>
         </form>
 
-        <p className="text-sm text-center mt-4">
+        {/* Footer */}
+        <p className="mt-6 text-center text-sm text-slate-400">
           Already have an account?{" "}
-          <Link href="/login" className="text-blue-600">
+          <Link
+            href="/login"
+            className="font-medium text-blue-400 hover:text-blue-300"
+          >
             Login
           </Link>
         </p>
-
       </div>
     </div>
   );

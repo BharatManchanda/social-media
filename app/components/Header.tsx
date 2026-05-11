@@ -35,7 +35,7 @@ export default function Header() {
   const [search, setSearch] = useState<string>("");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0F172A]/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 lg:px-6">
         
         {/* Left */}
@@ -47,11 +47,11 @@ export default function Header() {
             className="flex items-center gap-3"
           >
             <div className="hidden sm:block">
-              <h1 className="text-xl font-bold tracking-tight text-white">
+              <h1 className="text-xl font-bold tracking-tight text-slate-900">
                 Loopin
               </h1>
 
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500">
                 Connect with the world
               </p>
             </div>
@@ -66,7 +66,7 @@ export default function Header() {
                 <Link
                   key={index}
                   href={item.href}
-                  className="group relative flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-medium text-slate-300 transition-all duration-300 hover:bg-white/5 hover:text-white"
+                  className="group relative flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-medium text-slate-600 transition-all duration-300 hover:bg-slate-50 hover:text-slate-900"
                 >
                   <Icon
                     size={18}
@@ -90,7 +90,7 @@ export default function Header() {
             value={search}
             icon={<Search size={18} />}
             onChange={(e) => setSearch(e.target.value)}
-            className="h-12 focus:bg-white/10"
+            className="h-12 focus:bg-slate-100"
           />
         </div>
 
@@ -106,7 +106,7 @@ export default function Header() {
           {/* Login */}
           <Link
             href="/login"
-            className="hidden rounded-2xl px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-300 hover:bg-white/5 hover:text-white md:block"
+            className="hidden rounded-2xl px-5 py-2.5 text-sm font-medium text-slate-600 transition-all duration-300 hover:bg-slate-50 hover:text-slate-900 md:block"
           >
             Login
           </Link>

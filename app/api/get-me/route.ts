@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 
 export async function POST(req: Request) {
     try {
+        // const req.cookies.get("token")?.value;
         const user = await prisma.user.findFirst({
             where: {
                 id: req.user.id

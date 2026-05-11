@@ -8,7 +8,6 @@ import { Button } from "../components/ui/Button";
 import { loginUser } from "../redux/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useRouter } from "next/navigation";
-import api from "@/lib/axios";
 
 export default function LoginPage() {
 	const [form, setForm] = useState({
@@ -25,20 +24,18 @@ export default function LoginPage() {
 			email: form.email,
 			password: form.password,
 		}))
-	};
+	}
 
 	useEffect(() => {
 		if (auth.user || token) {
 		  router.push("/");
 		}
-	}, [auth, router]);
+	}, [auth, router])
 
 	return (
 		<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-100 px-4">
-			{/* Card */}
 			<div className="w-full max-w-md rounded-3xl border border-slate-200 bg-white/80 p-8 shadow-xl backdrop-blur-xl">
 
-			{/* Header */}
 			<div className="mb-8 text-center">
 				<h1 className="text-3xl font-bold text-slate-800">
 					Loopin
@@ -51,7 +48,6 @@ export default function LoginPage() {
 
 			<form onSubmit={handleSubmit} className="flex flex-col gap-5">
 
-				{/* Email */}
 				<Input
 					type="email"
 					placeholder="Email address"
@@ -61,7 +57,6 @@ export default function LoginPage() {
 					}
 				/>
 
-				{/* Password */}
 				<Input
 					type="password"
 					placeholder="Password"
@@ -71,7 +66,6 @@ export default function LoginPage() {
 					}
 				/>
 
-				{/* Forgot */}
 				<div className="flex justify-end">
 				<Link
 					href="/forgot"
@@ -81,14 +75,12 @@ export default function LoginPage() {
 				</Link>
 				</div>
 
-				{/* Button */}
 				<Button type="submit" loading={auth.loading}>
 					<LogIn size={18} />
 					Login
 				</Button>
 			</form>
 
-			{/* Footer */}
 			<p className="mt-6 text-center text-sm text-slate-500">
 				Don't have an account?{" "}
 				<Link

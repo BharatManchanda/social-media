@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "../../../../lib/prisma";
-import jwt from "jsonwebtoken";
+import { signToken } from "@/lib/jwt";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
@@ -17,14 +18,21 @@ export async function POST(req: Request) {
         if (!isMatch) {
             throw Error("Credential doesn't found.")
         }
-        const token = jwt.sign({
+        const token = signToken({
             id: user.id,
             email: user.email,
             name: user.name,
-        }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        console.log(process.env.JWT_SECRET,"::JWT_SECRET")
+        });
+        const response = NextResponse.json({ message: "Login successful", user, token });
 
-        return Response.json({user, token})
+        response.cookies.set("token", token, {
+            httpOnly: true,
+            path: "/",
+            secure: process.env.NODE_ENV === "production",
+        });
+
+        return response;
+
     } catch (error) {
         return Response.json(
 			{

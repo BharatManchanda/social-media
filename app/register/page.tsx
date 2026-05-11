@@ -21,6 +21,7 @@ export default function RegisterPage() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const auth = useAppSelector((state: any) => state.auth);
+	const token = localStorage.getItem("token")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,10 +29,10 @@ export default function RegisterPage() {
   };
 
   useEffect(() => {
-    if (auth.user) {
-      router.push("/");
-    }
-  }, [auth, router]);
+		if (auth.user || token) {
+		  router.push("/");
+		}
+	}, [auth, router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-100 px-4">

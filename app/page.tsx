@@ -2,19 +2,20 @@
 import LeftSidebar from "./components/LeftSidebar";
 import Feed from "./components/Feed";
 import RightSidebar from "./components/RightSidebar";
-import { useRouter } from "next/navigation";
-import { useLayoutEffect } from "react";
+// import { useRouter } from "next/navigation";
+// import { useLayoutEffect } from "react";
 import { useAppSelector } from "./redux/hooks";
+import withAuth from "./components/withAuth";
 
-export default function Home() {
-  const router = useRouter();
+function Home() {
+  // const router = useRouter();
   const auth = useAppSelector((state: any) => state.auth);
   
-  useLayoutEffect(() => {
-    if (!auth.user) {
-      router.push("/login");
-    }
-  }, [auth, router]);
+  // useLayoutEffect(() => {
+  //   if (!auth.user) {
+  //     router.push("/login");
+  //   }
+  // }, [auth, router]);
 
   return (
     <>
@@ -39,3 +40,5 @@ export default function Home() {
     </>
   );
 }
+
+export default withAuth(Home);

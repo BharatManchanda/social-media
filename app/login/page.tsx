@@ -8,6 +8,7 @@ import { Button } from "../components/ui/Button";
 import { loginUser } from "../redux/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useRouter } from "next/navigation";
+import api from "@/lib/axios";
 
 export default function LoginPage() {
 	const [form, setForm] = useState({
@@ -17,6 +18,7 @@ export default function LoginPage() {
 	const dispatch = useAppDispatch();
 	const router = useRouter();
 	const auth = useAppSelector((state: any) => state.auth);
+	const token = localStorage.getItem("token")
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		await dispatch(loginUser({
@@ -26,7 +28,7 @@ export default function LoginPage() {
 	};
 
 	useEffect(() => {
-		if (auth.user) {
+		if (auth.user || token) {
 		  router.push("/");
 		}
 	}, [auth, router]);
@@ -80,7 +82,7 @@ export default function LoginPage() {
 				</div>
 
 				{/* Button */}
-				<Button type="submit">
+				<Button type="submit" loading={auth.loading}>
 					<LogIn size={18} />
 					Login
 				</Button>

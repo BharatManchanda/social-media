@@ -16,7 +16,22 @@ export function proxy(req: NextRequest) {
     }
 
     try {
-        if (token) verifyToken(token);
+        if (token) {
+            const decoded = verifyToken(token);
+
+            // clone request headers
+            const requestHeaders = new Headers(req.headers);
+
+            // pass user data
+            requestHeaders.set("x-user-id", decoded.id);
+            requestHeaders.set("x-user-email", decoded.email);
+
+            return NextResponse.next({
+                request: {
+                    headers: requestHeaders,
+                },
+            });
+        };
     } catch (err) {
         return NextResponse.redirect(new URL("/login", req.url));
     }
@@ -27,5 +42,6 @@ export function proxy(req: NextRequest) {
 export const config = {
     matcher: [
         "/",
+        "/api/post",
     ],
 };

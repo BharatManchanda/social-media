@@ -4,6 +4,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Button } from "./ui/Button";
 import { Textarea } from "./ui/Textarea";
 import { Image as ImageIcon, Smile, MapPin, X } from "lucide-react";
+import api from "../../lib/axios";
 
 export interface PostState {
   content: string;
@@ -28,6 +29,7 @@ export default function CreatePost({
     image: null,
     location: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setPostData((prev) => ({ ...prev, content: e.target.value }));
@@ -43,16 +45,35 @@ export default function CreatePost({
     setPostData((prev) => ({ ...prev, image: null }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (onSubmit) {
-      onSubmit(postData);
+    console.log("log")
+    if (!postData.content.trim() && !postData.image) return;
+
+    try {
+      setIsLoading(true);
+      // Ensure we hit the endpoint using axios
+      const response = await api.post("/post", {
+        content: postData.content,
+        // Send a dummy authorId if authentication is not fully setup yet
+        authorId: 1, 
+      });
+
+      if (onSubmit) {
+        onSubmit(postData);
+      }
+      
+      // Reset state after successful submission
+      setPostData({ content: "", image: null, location: "" });
+    } catch (error) {
+      console.error("Failed to create post:", error);
+      // Optional: Handle error UI here
+    } finally {
+      setIsLoading(false);
     }
-    // Reset state after submission
-    setPostData({ content: "", image: null, location: "" });
   };
 
-  const isSubmitDisabled = !postData.content.trim() && !postData.image;
+  const isSubmitDisabled = (!postData.content.trim() && !postData.image) || isLoading;
 
   return (
     <form
@@ -128,10 +149,11 @@ export default function CreatePost({
             <Button
               type="submit"
               disabled={isSubmitDisabled}
+              loading={isLoading}
               size="sm"
               className="w-auto px-6 py-2"
             >
-              Post
+              Post d
             </Button>
           </div>
         </div>

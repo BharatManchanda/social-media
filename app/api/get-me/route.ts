@@ -1,17 +1,21 @@
 import { prisma } from "../../../lib/prisma";
+import { NextRequest } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     try {
         const userId = req.headers.get("x-user-id");
+        const token = req.cookies.get("token")?.value;
+
         const user = await prisma.user.findFirst({
             where: {
-                id: userId as any
+                id: Number(userId)
             }
         });
         return Response.json(
             {
                 message: "Get me successfully",
-                user: user
+                user,
+                token
             }
         );
     } catch (error) {

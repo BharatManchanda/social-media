@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useAppSelector } from "../redux/hooks";
 import {
   Search,
   Home,
@@ -33,14 +34,15 @@ const navItems = [
 
 export default function Header() {
   const [search, setSearch] = useState<string>("");
+  const user = useAppSelector((state) => state.auth.user);
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 lg:px-6">
-        
+
         {/* Left */}
         <div className="flex items-center gap-10">
-          
+
           {/* Logo */}
           <Link
             href="/"
@@ -96,28 +98,36 @@ export default function Header() {
 
         {/* Right */}
         <div className="flex items-center gap-3">
-          
+
           {/* Notification */}
           <Button variant="outline" size="icon" className="relative hidden md:flex">
             <Bell size={19} />
             <span className="absolute right-3 top-3 h-2 w-2 rounded-full bg-red-500"></span>
           </Button>
 
-          {/* Login */}
-          <Link
-            href="/login"
-            className="hidden rounded-2xl px-5 py-2.5 text-sm font-medium text-slate-600 transition-all duration-300 hover:bg-slate-50 hover:text-slate-900 md:block"
-          >
-            Login
-          </Link>
+          {user ? (
+            <div className="hidden items-center gap-3 md:flex">
+              <Link href="/profile" className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-blue-100 text-blue-600 font-bold shadow-sm ring-2 ring-white">
+                {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+              </Link>
+            </div>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="hidden rounded-2xl px-5 py-2.5 text-sm font-medium text-slate-600 transition-all duration-300 hover:bg-slate-50 hover:text-slate-900 md:block"
+              >
+                Login
+              </Link>
 
-          {/* Sign Up */}
-          <Link
-            href="/register"
-            className="hidden rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:shadow-blue-500/40 md:block"
-          >
-            Get Started
-          </Link>
+              <Link
+                href="/register"
+                className="hidden rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:shadow-blue-500/40 md:block"
+              >
+                Get Started
+              </Link>
+            </>
+          )}
 
           {/* Mobile Menu */}
           <Button variant="outline" size="icon" className="flex lg:hidden">

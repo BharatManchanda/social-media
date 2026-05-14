@@ -40,6 +40,15 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
 	await api.post("/logout");
 });
 
+export const getMe = createAsyncThunk("auth/get-me", async (_, { rejectWithValue }) => {
+	try {
+		const res = await api.post("/get-me");
+		return res.data;
+	} catch (err: any) {
+		return rejectWithValue(err.response?.data?.message || "Failed to fetch user");
+	}
+});
+
 const authSlice = createSlice({
 	name: "auth",
 	initialState,
@@ -73,6 +82,25 @@ const authSlice = createSlice({
 			state.user = null;
 			state.token = null;
 			localStorage.removeItem("token");
+			localStorage.removeItem("user");
+		})
+
+		// get me
+		.addCase(getMe.pending, (state) => {
+			state.loading = true;
+		})
+		.addCase(getMe.fulfilled, (state, action) => {
+			state.loading = false;
+			state.user = action.payload.user;
+			if (action.payload.token) {
+				state.token = action.payload.token;
+				localStorage.setItem("token", action.payload.token);
+			}
+			localStorage.setItem("user", JSON.stringify(action.payload.user));
+		})
+		.addCase(getMe.rejected, (state, action: any) => {
+			state.loading = false;
+			state.error = action.payload;
 		});
 	},
 });

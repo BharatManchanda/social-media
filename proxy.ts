@@ -43,5 +43,6 @@ export const config = {
     matcher: [
         "/",
         "/api/post",
+        "/api/get-me",
     ],
 };
